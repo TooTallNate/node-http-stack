@@ -1,0 +1,9 @@
+GET /ws HTTP/1.1
+Upgrade: WebSocket
+Connection: Upgrade
+Host: localhost:8080
+Origin: null
+Sec-WebSocket-Key1: 30 T8% 9l G7 627D  |3 0 $ L
+Sec-WebSocket-Key2: 28F3116   I5{6b5%2
+
+8Q±o”3A9

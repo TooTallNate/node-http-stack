@@ -1,0 +1,8 @@
+GET /icecast HTTP/1.0
+Host: localhost:8080
+Accept: */*
+User-Agent: NSPlayer/7.10.0.3059
+Pragma: no-cache,rate=1.000000,stream-time=0,stream-offset=0:0,request-context=1,max-duration=0
+Pragma: xClientGUID={babac001-61a9-48f4-65946192551e4da5}
+Connection: Close
+
