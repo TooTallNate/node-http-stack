@@ -86,3 +86,6 @@ TODO
 - Chunked encoding/decoding
 - Keep-Alive (needs chunked encoding)
 - Testing...
+
+[StreamStack]: http://github.com/TooTallNate/node-stream-stack
+[Node]: http://nodejs.org
