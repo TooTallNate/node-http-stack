@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "author": "Nathan Rajlich <nathan@tootallnate.net>",
   "keywords": ["stream", "stack", "http", "protocol"],
+  "dependencies" : { "stream-stack" : "*" },
   "main": "./lib/http-stack",
   "engines": { "node": ">= 0.3.0" }
 }
