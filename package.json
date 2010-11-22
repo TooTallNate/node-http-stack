@@ -1,10 +1,14 @@
 {
   "name": "http-stack",
   "description": "A `StreamStack` implementation of the HTTP protocol.",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "author": "Nathan Rajlich <nathan@tootallnate.net>",
   "keywords": ["stream", "stack", "http", "protocol"],
   "dependencies" : { "stream-stack" : "*" },
   "main": "./lib/http-stack",
+  "modules": {
+    "client": "./lib/client",
+    "server": "./lib/server"
+  },
   "engines": { "node": ">= 0.3.0" }
 }
