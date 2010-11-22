@@ -5,7 +5,9 @@ var HttpResponseStack = require('../lib/http-stack').HttpResponseStack;
 var rs = fs.createReadStream(__dirname + '/dumps/requests/simple-curl-get.dump', {bufferSize:1});
 var res = new HttpResponseStack(rs);
 
+var gotRequest = false;
 res.on('request', function(req) {
+  gotRequest = true;
   assert.equal(req.method, 'GET');
   assert.equal(req.path, '/');
   assert.equal(req.httpVersion, 'HTTP/1.1');
@@ -26,3 +28,6 @@ res.on('request', function(req) {
   assert.equal(req.headers['accept'], '*/*');
 });
 
+process.on('exit', function() {
+  assert.ok(gotRequest);
+});
