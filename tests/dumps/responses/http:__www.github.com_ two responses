@@ -1,0 +1,30 @@
+HTTP/1.1 301 Moved Permanently
+Server: nginx/0.7.67
+Date: Tue, 23 Nov 2010 22:20:44 GMT
+Content-Type: text/html
+Content-Length: 185
+Connection: keep-alive
+Location: http://github.com/
+
+<html>
+<head><title>301 Moved Permanently</title></head>
+<body bgcolor="white">
+<center><h1>301 Moved Permanently</h1></center>
+<hr><center>nginx/0.7.67</center>
+</body>
+</html>
+HTTP/1.1 301 Moved Permanently
+Server: nginx/0.7.67
+Date: Tue, 23 Nov 2010 22:20:44 GMT
+Content-Type: text/html
+Content-Length: 185
+Connection: keep-alive
+Location: http://github.com/test
+
+<html>
+<head><title>301 Moved Permanently</title></head>
+<body bgcolor="white">
+<center><h1>301 Moved Permanently</h1></center>
+<hr><center>nginx/0.7.67</center>
+</body>
+</html>
