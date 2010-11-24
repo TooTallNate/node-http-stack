@@ -14,9 +14,7 @@ var server = httpServer.createServer(function(request, response) {
 
   console.error("Got HTTP Request!");
   console.error(request.method, request.path, request.httpVersion);
-  request.headers.forEach(function(h) {
-    console.error(String(h));
-  });
+  console.error(request.headers);
   
   assert.equal(request.method, 'GET');
   assert.equal(request.path, '/hello');
@@ -38,13 +36,15 @@ server.listen(suite.COMMON_PORT, function() {
   var req = client.request('GET', '/hello', { 'Something': 1234 });
   req.end();
   req.on('response', function(res) {
-    gotResponse = true;
 
     console.error("Got HTTP Response!");
+    console.error(res.headers);
+
+    gotResponse = true;
     assert.equal(res.statusCode, 200);
     assert.equal(res.httpVersion, '1.1');
     assert.equal(res.headers['content-type'], 'text/plain');
-    assert.equal(res.headers['content-length'], 12);
+    assert.equal(res.headers['content-length'], BODY.length);
     assert.equal(res.headers['connection'], 'close');
 
     var body = '';

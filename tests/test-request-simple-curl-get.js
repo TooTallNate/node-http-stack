@@ -8,6 +8,11 @@ var res = new HttpResponseStack(rs);
 var gotRequest = false;
 res.on('request', function(req) {
   gotRequest = true;
+
+  console.error("Got HTTP Request!");
+  console.error(req.method, req.path, req.httpVersion);
+  console.error(req.headers);
+
   assert.equal(req.method, 'GET');
   assert.equal(req.path, '/');
   assert.equal(req.httpVersion, 'HTTP/1.1');
