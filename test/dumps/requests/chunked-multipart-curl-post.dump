@@ -1,0 +1,41 @@
+POST / HTTP/1.1
+User-Agent: curl/7.19.7 (universal-apple-darwin10.0) libcurl/7.19.7 OpenSSL/0.9.8l zlib/1.2.3
+Host: localhost:8080
+Accept: */*
+Transfer-Encoding: chunked
+Expect: 100-continue
+Content-Type: multipart/form-data; boundary=----------------------------ca1ec4803f3e
+
+a2
+------------------------------ca1ec4803f3e
+Content-Disposition: form-data; name="upfile"; filename="netStreamDump.js"
+Content-Type: application/octet-stream
+
+
+2fe
+var port = 8080;
+require('net').createServer(function(stream) {
+  var id = Date.now();
+  var addr = stream.address();
+  var filename = addr.address + '.' + id + '.dump';
+  var dumpStream = require('fs').createWriteStream(filename);
+  dumpStream.on('close', function() {
+    console.error('File "' + filename + '" closed');
+  });
+  stream.on('timeout', function() {
+    console.error('Closing connection id ' + id + ', due to inactivity (timeout after 5 seconds)');
+    stream.end();
+  });
+  stream.pipe(dumpStream);
+  console.error('Connection from "' + addr.address + ':' + addr.port + '" (id ' + id + '), piping contents to "' + filename + '"');
+  stream.setTimeout(5000);
+}).listen(port, function() {
+  console.error('TCP server listening on port: ' + port);
+});
+
+30
+
+------------------------------ca1ec4803f3e--
+
+0
+
