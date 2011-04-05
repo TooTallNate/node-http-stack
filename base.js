@@ -3,8 +3,6 @@ var StreamStack  = require('stream-stack').StreamStack;
 var Headers      = require('header-stack').Headers;
 var HeaderParser = require('header-stack').Parser;
 
-var STATUS_CODES = require('http').STATUS_CODES;
-
 /**
  * The base class for HTTP requests and responses. It implements logic common
  * to both types of actions, like header sending/parsing and (someday) chunked

@@ -1,6 +1,9 @@
 var HttpBaseStack = require('./base');
 var inherits = require('util').inherits;
 
+var STATUS_CODES = require('http').STATUS_CODES;
+
+
 /**
  * StreamStack for parsing an HTTP request, and writing the HTTP response.
  */
