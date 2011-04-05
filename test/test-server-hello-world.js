@@ -1,6 +1,6 @@
 var assert = require('assert');
 var coreHttp = require('http');
-var httpServer = require('http-stack/server');
+var httpServer = require('../server');
 var suite = require('./suite');
 
 var gotRequest = false;
