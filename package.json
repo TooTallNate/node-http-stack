@@ -1,6 +1,13 @@
 {
   "name": "http-stack",
   "description": "A `StreamStack` implementation of the HTTP protocol.",
+  "tags": [
+    "http",
+    "js",
+    "stream",
+    "stack",
+    "stream-stack"
+  ],
   "version": "0.1.1",
   "author": "Nathan Rajlich <nathan@tootallnate.net>",
   "keywords": [
@@ -10,18 +17,15 @@
     "protocol"
   ],
   "dependencies": {
-    "stream-stack": "*"
+    "stream-stack": ">= 1.1.1",
+    "header-stack": ">= 0.1.1"
   },
-  "main": "./lib/http-stack",
-  "modules": {
-    "client": "./lib/client",
-    "server": "./lib/server"
-  },
+  "main": "./http-stack",
   "engines": {
     "node": ">= 0.3.0"
   },
   "directories": {
-    "lib": "./lib"
+    "lib": "."
   },
   "files": [
     ""
