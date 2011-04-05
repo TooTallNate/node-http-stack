@@ -20,7 +20,7 @@
     "stream-stack": ">= 1.1.1",
     "header-stack": ">= 0.1.1"
   },
-  "main": "./http-stack",
+  "main": "./index.js",
   "engines": {
     "node": ">= 0.3.0"
   },

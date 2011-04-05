@@ -20,7 +20,7 @@ function HttpBaseStack(stream) {
   this._headerParser.on('firstLine', this._onFirstLine.bind(this));
 }
 inherits(HttpBaseStack, StreamStack);
-exports.HttpBaseStack = HttpBaseStack;
+module.exports = HttpBaseStack;
 
 // The HTTP version string to use for this request or response.
 HttpBaseStack.prototype.httpVersion = 'HTTP/1.1';
@@ -93,86 +93,3 @@ HttpBaseStack.prototype._onHeaders = function(headers, leftover, stream) {
   stream.headers = headers;
   this.emit(this._headerCompleteEvent, stream);
 }
-
-
-
-
-/**
- * StreamStack for writing HTTP requests and parsing the response.
- */
-function HttpRequestStack(stream) {
-  HttpBaseStack.call(this, stream);
-}
-inherits(HttpRequestStack, HttpBaseStack);
-exports.HttpRequestStack = HttpRequestStack;
-
-// Bool to keep track of whether or not this 'HttpRequestStack'
-// instance has had a request sent on it already.
-HttpRequestStack.prototype.requestSent = false;
-
-HttpRequestStack.prototype.request = function(method, path, headers) {
-  if (this.requestSent) throw new Error('A request has already been sent on '+
-    'this `HttpRequestStack` instance. Wait for the "end" event, then create '+
-    'a new HttpRequestStack on the original `Stream`.');
-  this.requestSent = true;
-  return this._writeHeader(method + ' ' + path + ' ' + this.httpVersion, headers);
-}
-
-HttpRequestStack.prototype.get = function(path, headers) {
-  return this.request("GET", path, headers);
-}
-
-HttpRequestStack.prototype.post = function(path, headers) {
-  return this.request("POST", path, headers);
-}
-
-// The name of the event that gets called after the HTTP headers have been
-// received and parsed.
-HttpRequestStack.prototype._headerCompleteEvent = "response";
-
-// Parses the first HTTP header line into 'httpVersion', 'statusCode', and
-// 'statusMessage' properties.
-HttpRequestStack.prototype._parseFirstLine = function(line, res) {
-  var i = line.indexOf(' ');
-  res.httpVersion = line.substring(0, i);
-  var j = line.indexOf(' ', i+1);
-  res.statusCode = line.substring(i+1, j);
-  res.statusMessage = line.substring(j+1);
-}
-
-
-
-
-/**
- * StreamStack for parsing an HTTP request, and writing the HTTP response.
- */
-function HttpResponseStack(stream) {
-  HttpBaseStack.call(this, stream);
-}
-inherits(HttpResponseStack, HttpBaseStack);
-exports.HttpResponseStack = HttpResponseStack;
-
-// Bool to keep track of whether or not this 'HttpResponseStack' instance has
-// had a it's response header written yet or not.
-HttpResponseStack.prototype.headerSent = false;
-
-// Writes the HTTP Response first line and headers to the writable stream.
-HttpResponseStack.prototype.writeHead = function(statusCode, headers) {
-  headers = headers || [];
-  this.headerSent = true;
-  return this._writeHeader(this.httpVersion + ' ' + statusCode + ' ' + STATUS_CODES[statusCode], headers);
-}
-
-// The name of the event that gets called after the HTTP headers have been
-// received and parsed.
-HttpResponseStack.prototype._headerCompleteEvent = "request";
-
-// Parses the first HTTP header line into 'method', 'path', and 'httpVersion' props.
-HttpResponseStack.prototype._parseFirstLine = function(line, req) {
-  var i = line.indexOf(' ');
-  req.method = line.substring(0, i);
-  var j = line.indexOf(' ', i+1);
-  req.path = line.substring(i+1, j);
-  req.httpVersion = line.substring(j+1);
-}
-
