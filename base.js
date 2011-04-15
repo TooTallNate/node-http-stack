@@ -90,4 +90,7 @@ HttpBaseStack.prototype._onHeaders = function(headers, leftover, stream) {
   this._headerParser = null;
   stream.headers = headers;
   this.emit(this._headerCompleteEvent, stream);
+  if (leftover) {
+    this.emit('data', leftover);
+  }
 }
